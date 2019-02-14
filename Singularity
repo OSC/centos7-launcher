@@ -10,11 +10,17 @@ Include: yum
 This will run RStudio Server which must be mounted with dependencies into the container
 
 %apprun rserver
-  export PATH="$USER_PATH"
+  if ! [[ "$USER_PATH" = "" ]]; then
+    export PATH="$USER_PATH"
+  fi
+
   exec rserver "${@}"
 
 %runscript
-  export PATH="$USER_PATH"
+  if ! [[ "$USER_PATH" = "" ]]; then
+    export PATH="$USER_PATH"
+  fi
+
   exec rserver "${@}"
 
 %post
